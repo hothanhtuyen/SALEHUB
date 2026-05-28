@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salehub - Fashion Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Jost', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Custom Utilities */
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        a:hover {
+            color: #666;
+        }
+
+        .bg-black {
+            background-color: #000 !important;
+        }
+
+        .text-xs {
+            font-size: 0.75rem;
+        }
+
+        .letter-spacing {
+            letter-spacing: 2px;
+        }
+
+        /* Banner Overlays */
+        .hero-banner {
+            background-image: url('public/images/banner.jpg');
+            height: 80vh;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        /* Product Cards */
+        .product-img-wrapper {
+            overflow: hidden;
+        }
+
+        .product-img-wrapper img {
+            transition: transform 0.5s ease;
+        }
+
+        .product-img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Lookbook Hotspots */
+        .hotspot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+            }
+        }
+
+
+        .hero-banner {
+            background-image: url('public/images/banner.jpg');
+            background-size: cover;
+            /* full ảnh */
+            background-position: center;
+            /* canh giữa */
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 100vh;
+            /* full màn hình */
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Navbar trong suốt */
+        .navbar {
+            background: transparent !important;
+        }
+
+        /* Hero content */
+        .hero-content {
+            height: 70vh;
+            z-index: 2;
+            position: relative;
+        }
+
+        /* 3 card nổi lên */
+        .category-section {
+            margin-top: -120px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .category-card img {
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .category-card {
+            overflow: hidden;
+        }
+
+        .category-card img {
+            transition: 0.5s;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        .footer-links li {
+            margin-bottom: 10px;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .footer-links li a:hover {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-dark text-white py-2 text-xs">
+        <div class="container-fluid px-4 d-flex justify-content-between align-items-center">
+            <div class="social-icons d-flex gap-3">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-pinterest-p"></i>
+                <i class="fab fa-vimeo-v"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+            <div class="text-center text-uppercase letter-spacing d-none d-md-block">
+                <i class="fas fa-chevron-left me-2"></i> Simply return it within 30 days for an exchange <i
+                    class="fas fa-chevron-right ms-2"></i>
+            </div>
+            <div class="currency">
+                USD <i class="fas fa-angle-down"></i>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="hero-banner text-white position-relative">
+
+        <div class="hero-overlay"></div>
+
+
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-expand-lg py-3 position-relative z-2">
+            <div class="container-fluid px-4">
+
+
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav fw-bold text-uppercase text-xs gap-3">
+                        <li><a class="nav-link text-white" href="#">Home</a></li>
+                        <li><a class="nav-link text-white" href="#">Pages</a></li>
+                        <li><a class="nav-link text-white" href="#">Women</a></li>
+                        <li><a class="nav-link text-white" href="#">Men</a></li>
+                        <li><a class="nav-link text-white" href="#">Blog</a></li>
+                    </ul>
+                    <a class="navbar-brand text-white fw-bold fs-3 mx-auto ">
+                        <img src="public/images/logo_350x.png">
+                    </a>
+                </div>
+
+
+
+                <div class="d-flex gap-3 text-white text-uppercase text-xs align-items-center">
+
+                    <i class="fas fa-search"></i>
+
+                    <span class="d-none d-md-inline">SEARCH</span>
+
+                    <span class="line">|</span>
+
+                    <span class="d-none d-md-inline">ACCOUNT</span>
+
+                    <span class="line">|</span>
+                    <i class="fas fa-shopping-bag"></i>
+
+
+                    <span class="d-none d-md-inline">MY CART </span>
+
+                    <span class="d-none d-md-inline">0</span>
+
+                </div>
+
+            </div>
+        </nav>
+
+        <!-- HERO TEXT -->
+        <div class="hero-content d-flex align-items-center justify-content-center text-center">
+            <div>
+                <h6 class="letter-spacing mb-3 fw-bold">TRENDING FOR MEN</h6>
+                <h1 class="display-2 fw-bold text-uppercase mb-4">Denim Jacket</h1>
+                <a href="" class="btn  ">
+                    <img src="public/Mockups/shop_hover.png" alt="">
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 3 CATEGORY -->
+    <div class="container-fluid bg-black category-section px-4  col ">
+        <div class="row g-4">
+
+            <div class="col-md-4" style="color: white;">
+                <div class="category-card position-relative">
+                    <img src="public/images/anh1.jpg" class="w-100" style="height: auto;">
+                    <div class="position-absolute bottom-0 start-50 translate-middle-x mb-4">
+                        <a href="#" class="btn p-0 border-0 bg-transparent">
+                            <img src="public/Mockups/shop_hover.png" alt="Shop The Collection"
+                                style="width: 160px; height: auto;">
+                        </a>
+                    </div>
+                </div>
+                <div class="text-center mt-3   ">
+                    <h6 class="fw-bold text-uppercase">Denim Jacket Outfits</h6>
+                    <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit aspernatur consectetur quisquam
+                        amet obcaecati nihil tempore sequi facere impedit excepturi a cupiditate praesentium, molestias
+                        odit ex minus quasi perferendis illo?</p>
+                </div>
+            </div>
+
+            <div class="col-md-4" style="color: white;">
+                <div class="category-card position-relative">
+                    <img src="public/images/anh2.jpg" class="w-100" style="height: auto;">
+                    <div class="position-absolute bottom-0 start-50 translate-middle-x mb-4">
+                        <a href="#" class="btn p-0 border-0 bg-transparent">
+                            <img src="public/Mockups/shop_hover.png" alt="Shop The Collection"
+                                style="width: 160px; height: auto;">
+                        </a>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <h6 class="fw-bold text-uppercase">Women's Jackets</h6>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur perferendis officiis, eos
+                        saepe fugiat ea sed maxime! Obcaecati totam, deserunt recusandae repellat unde sint, ea
+                        temporibus porro vitae itaque dolor.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4" style="color: white;">
+                <div class="category-card position-relative">
+                    <img src="public/images/anh3.jpg" class="w-100"style="height: auto">
+                    <div class="position-absolute bottom-0 start-50 translate-middle-x mb-4">
+                        <a href="#" class="btn p-0 border-0 bg-transparent">
+                            <img src="public/Mockups/shop_hover.png" alt="Shop The Collection"
+                                style="width: 160px; height: auto;">
+                        </a>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <h6 class="fw-bold text-uppercase">T-Shirt</h6>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quibusdam totam vero inventore magni
+                        vitae, fugit cum temporibus. Expedita recusandae reiciendis, laborum autem iure quos odit
+                        commodi eos dicta architecto excepturi?</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <section class="bg-black text-white py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <i class="fas fa-exchange-alt fs-3 mb-3"></i>
+                    <h6 class="fw-bold text-uppercase mb-1">30 Days Return</h6>
+                    <p class=" text-xs mb-0"style="color: white;">Simply return it within 30 days for an exchange.</p>
+                </div>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <i class="fas fa-truck fs-3 mb-3"></i>
+                    <h6 class="fw-bold text-uppercase mb-1">Free US Delivery</h6>
+                    <p class=" text-xs mb-0"style="color: white;">On orders over $200!</p>
+                </div>
+                <div class="col-md-4"  >
+                    <i class="fas fa-headset fs-3 mb-3"></i>
+                    <h6 class="fw-bold text-uppercase mb-1">Support 24/7</h6>
+                    <p class=" text-xs mb-0" style="color: white;">Contact us 24 hours a day, 7 days a week</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="py-5 text-center container-fluid px-4">
+        <h2 class="fw-bold text-uppercase mb-4">Gotta Have It</h2>
+
+        <ul class="nav justify-content-center border-bottom mb-4 pb-2 text-xs fw-bold text-uppercase gap-4">
+            <li class="nav-item"><a class="nav-link text-dark border-bottom border-dark border-2 px-0" href="#">New
+                    Arrivals</a></li>
+            <li class="nav-item"><a class="nav-link text-muted px-0" href="#">Best Sellers</a></li>
+            <li class="nav-item"><a class="nav-link text-muted px-0" href="#">On Sale</a></li>
+        </ul>
+
+        <div class="position-relative">
+            <div class="row g-4">
+                <div class="col-md-4 text-start">
+                    <div class="product-img-wrapper mb-3 bg-light">
+                        <img src="public/images/anh4.jpg" class="w-100" alt="Product">
+                    </div>
+                    <h6>Faux suede biker jacket</h6>
+                    <div class="text-warning text-xs mb-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <p class="fw-bold">$60.00</p>
+                </div>
+                <div class="col-md-4 text-start">
+                    <div class="product-img-wrapper mb-3 bg-light">
+                        <img src="public/images/anh5.jpg" class="w-100" alt="Product">
+                    </div>
+                    <h6>Pocketed denim jacket</h6>
+                    <div class="text-muted text-xs mb-2">
+                        <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i
+                            class="far fa-star"></i><i class="far fa-star"></i>
+                    </div>
+                    <p class="fw-bold">$56.00</p>
+                </div>
+                <div class="col-md-4 text-start">
+                    <div class="product-img-wrapper mb-3 bg-light">
+                        <img src="public/images/anh6.jpg" class="w-100" alt="Product">
+                    </div>
+                    <h6>Oversized jacket with denim panels</h6>
+                    <div class="text-warning text-xs mb-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="fw-bold">$33.00</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="hero-banner d-flex align-items-end p-5"
+            style="background-image: url('public/images/anh7.jpg'); height: 100vh;">
+            <div class="text-white text-center w-100 position-relative z-index-1">
+                <h2 class="display-3 fw-bold serif-font mb-4" style="font-family: 'Times New Roman', serif;">
+
+                    <a href="#" class="btn btn-light rounded-0 px-4 py-2 text-uppercase text-xs fw-bold">Shop the lounge
+                        collection
+                    </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container-fluid px-0">
+        <div class="row g-0 align-items-center">
+            <div class="col-md-7 position-relative">
+                <img src="public/images/anh8.jpg" class="w-100" alt="Lookbook">
+                <div class="hotspot" style="top: 50%; left: 30%;"></div>
+                <div class="hotspot" style="top: 70%; left: 45%;"></div>
+                <div class="hotspot" style="top: 85%; left: 40%;"></div>
+            </div>
+            <div
+                class="col-md-5 bg-light p-5 text-center d-flex flex-column align-items-center justify-content-center h-100">
+
+                <img src="public/images/anh 9.webp" class="img-fluid mb-4 mix-blend-multiply" alt="Jacket">
+
+                <h6>Shimmery mini skirt with ruching</h6>
+
+                <p class="fw-bold mb-4">$10.00</p>
+                <button class="btn btn-black bg-black text-white rounded-0 px-5 py-3 w-100 fw-bold text-xs">ADD TO
+                    BAG</button>
+
+                <!-- DOT PAGINATION -->
+                <div class="d-flex justify-content-center mt-4 gap-2">
+
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+
+                </div>
+
+            </div>
+
+            <style>
+                .dot {
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    background: #d9d9d9;
+                    display: inline-block;
+                    cursor: pointer;
+                    transition: 0.3s;
+                }
+
+                .dot.active {
+                    background: black;
+                    transform: scale(1.1);
+                }
+            </style>
+        </div>
+    </section>
+
+    <section class="bg-light py-5 text-center">
+        <div class="container py-5">
+            <p class="text-xs text-uppercase letter-spacing mb-4">Our Story</p>
+            <h3 class="fw-bold mb-4 w-75 mx-auto" style="line-height: 1.5;">“Being perfectly well-dressed gives one a
+                tranquillity
+
+                that no religion can bestow”</h3>
+            <p class="text-muted text-sm w-50 mx-auto mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida.
+            </p>
+
+        </div>
+    </section>
+    <section class=" py-5 text-center">
+        <div class="container py-5">
+            <a href="#" class="text-dark text-xs text-uppercase  pb-1 fw-bold">All about us</a>
+
+
+        </div>
+    </section>
+
+    <section class="container py-5 text-center">
+
+        <h6 class="fw-bold text-uppercase mb-5 letter-spacing">TRENDING BRANDS
+        </h6>
+        <div class="row align-items-center justify-content-center opacity-50">
+            <div class="col-4 col-md-2 mb-4"><i class=""></i>
+                <p class=" mt-2 fw-bold"><img src="public/images/m-6_160x160@2x.png.webp" alt=""></p>
+            </div>
+            <div class="col-4 col-md-2 mb-4"><i class=""></i>
+                <p class="text-xs mt-2 fw-bold"><img src="public/images/m-5_160x160@2x.png.webp" alt=""></p>
+            </div>
+            <div class="col-4 col-md-2 mb-4"><i class=""></i>
+                <p class="text-xs mt-2 fw-bold"><img src="public/images/m-2_160x160@2x.png.webp" alt=""></p>
+            </div>
+            <div class="col-4 col-md-2 mb-4"><i class=""></i>
+                <p class="text-xs mt-2 fw-bold"><img src="public/images/m-1_160x160@2x.png.webp" alt=""></p>
+            </div>
+            <div class="col-4 col-md-2 mb-4"><i class=""></i>
+                <p class="text-xs mt-2 fw-bold"><img src="public/images/m-4_160x160@2x.png.webp" alt=""></p>
+            </div>
+            <div class="col-4 col-md-2 mb-4"><i class=""></i>
+                <p class="text-xs mt-2 fw-bold"><img src="public/images/m-3_160x160@2x.png.webp" alt=""></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="text-center">
+        <div class="py-5">
+            <h4 class="fw-bold text-uppercase mb-3">Let's Be Friends</h4>
+            <p class="text-muted text-sm mb-1">Follow us: @salehub</p>
+            <p class="text-muted text-sm mb-1">Share your style: #salehubstyle</p>
+            <p class="text-muted text-sm mb-4">We obsessively watch those hashtags - share a pic and you might be
+                featured :)
+            </p>
+        </div>
+
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="public/images/footer1.jpg" class="w-100 h-100 object-fit-cover" alt="Insta">
+            </div>
+            <div class="col-md-8">
+                <div class="row g-0 h-100">
+                    <div class="col-4"><img src="public/images/ft2.jpg" class="w-100 h-100 object-fit-cover"
+                            alt="Insta"></div>
+                    <div class="col-4"><img src="public/images/ft3.jpg" class="w-100 h-100 object-fit-cover"
+                            alt="Insta"></div>
+                    <div class="col-4"><img src="public/images/ft4.jpg" class="w-100 h-100 object-fit-cover"
+                            alt="Insta"></div>
+                    <div class="col-4"><img src="public/images/ft5.jpg" class="w-100 h-100 object-fit-cover"
+                            alt="Insta"></div>
+                    <div class="col-4"><img src="public/images/ft6.jpg" class="w-100 h-100 object-fit-cover"
+                            alt="Insta"></div>
+                    <div class="col-4"><img src="public/images/ft7.jpg" class="w-100 h-100 object-fit-cover"
+                            alt="Insta"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="bg-white py-4 border-bottom">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center">
+            <div class="d-flex gap-3">
+                <img src="public/images/img-13_240x.png" alt="">
+            </div>
+            <div class="social-icons d-flex gap-4 fs-5 text-dark">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-pinterest-p"></i>
+                <i class="fab fa-vimeo-v"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+            <div class="payment-icons d-flex gap-2">
+                <img src="public/images/paypal_240x.png" alt="">
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white py-5" style="background-color: #1a1a1a !important;">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h6 class="fw-bold text-uppercase mb-4">Informations</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">Customer Service</a></li>
+                        <li><a href="#">Shipping and Delivery</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Size Charts</a></li>
+                        <li><a href="#">Email Signup</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h6 class="fw-bold text-uppercase mb-4">Customer Support</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">Customer Service</a></li>
+                        <li><a href="#">Shipping and Delivery</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Size Charts</a></li>
+                        <li><a href="#">Email Signup</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h6 class="fw-bold text-uppercase mb-4">Our Shop</h6>
+                    <ul class="list-unstyled footer-links">
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Top Trending</a></li>
+                        <li><a href="#">Autumn Collection</a></li>
+                        <li><a href="#">Back in Stock</a></li>
+                        <li><a href="#">Bikini Tops</a></li>
+                        <li><a href="#">Bikini Bottoms</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h6 class="fw-bold text-uppercase mb-4">Newsletter</h6>
+                    <p class="text-sm text-secondary mb-4">Get 15% off your first purchase! Plus, be the first to know
+                        about sales, new product launches and exclusive offers!</p>
+                    <form class="d-flex">
+                        <input type="email" class="form-control rounded-0" placeholder="Email address">
+                        <button class="btn btn-light rounded-0 px-3 fw-bold text-xs text-uppercase"
+                            type="submit">Join</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-black text-center py-3 position-relative text-secondary text-xs">
+        <p class="mb-0">Copyright © 2021 Vinovathemes. All rights reserved.</p>
+        <button class="btn btn-light rounded-circle position-absolute end-0 top-50 translate-middle-y me-4"
+            style="width: 40px; height: 40px;">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
